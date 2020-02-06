@@ -1,0 +1,26 @@
+# Scalars
+scalar Date
+scalar JSON
+
+# Boilerplate
+type Info {
+  id: ID!
+  name: String!
+  description: String
+}
+
+type File {
+  id: ID!
+}
+
+input FileInput {
+  id: ID!
+}
+
+# Query Root
+type Query {
+  # Boilerplate
+  info: Info
+  extractTextFromImageFile(file: FileInput): String!
+  extractTextFromPdf(file: FileInput): String!
+}
