@@ -19,7 +19,6 @@ input FileInput {
 
 # Query Root
 type Query {
-  # Boilerplate
   info: Info
   extractTextFromImageFile(file: FileInput): String!
   extractTextFromPdf(file: FileInput): String!

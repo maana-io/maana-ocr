@@ -1,11 +1,11 @@
 {
-  "name": "maana-my-service",
+  "name": "maana-ocr",
   "author": "Maana, Inc.",
   "license": "MIT",
   "version": "1.0.0",
-  "description": "Maana Q Knowledge Service Template",
+  "description": "Maana OCR Service (using Tesseract.js)",
   "main": "src/start.js",
-  "repository": "git@github.com:maana-io/q-svc-templates.git",
+  "repository": "git@github.com:maana-io/maana-ocr.git",
   "scripts": {
     "docker-build": "docker build -t maana-service .",
     "docker-run": "docker run -p 8050:8050 maana-service",

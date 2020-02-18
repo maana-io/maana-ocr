@@ -1,11 +1,6 @@
 import { log, print } from 'io.maana.shared'
-
 import { gql } from 'apollo-server-express'
-import pubsub from '../../pubsub'
-import uuid from 'uuid'
-
 import { createWorker } from 'tesseract.js'
-
 import { PDFImage } from 'pdf-image'
 import http from 'http'
 import fs from 'fs'
@@ -86,29 +81,26 @@ export const resolver = {
       return extractTextFromImageFile(file.id)
     },
     extractTextFromPdf: async (_, { file }, { client }) => {
-      const pdfPath = await download(
-        file.id,
-        path.resolve(__dirname, `./pdf/${uuid()}.pdf`)
-      )
+      const dir = path.resolve(__dirname, `./pdf/`)
+      const pdfPath = await download(file.id, `${dir}/${uuid()}.pdf`)
 
-      var pdfImage = new PDFImage(pdfPath, {
+      const pdfImage = new PDFImage(pdfPath, {
         convertOptions: {
           '-alpha': 'off',
           '-density': 300
         }
       })
-      var imagePaths = await pdfImage.convertFile()
+      const imagePaths = await pdfImage.convertFile()
 
-      // fs.unlink(pdfPath)
       const text = await Promise.all(
         imagePaths.map(async path => extractTextFromImageFile(path))
       )
 
-      fs.readdir(path.resolve(__dirname, `./pdf/`), (err, files) => {
+      fs.readdir(dir, (err, files) => {
         if (err) throw err
 
         for (const file of files) {
-          fs.unlink(path.join(path.resolve(__dirname, `./pdf/`), file), err => {
+          fs.unlink(path.join(dir, file), err => {
             if (err) throw err
           })
         }
