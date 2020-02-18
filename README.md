@@ -1,6 +1,6 @@
 # Maana OCR
 
-This service provides functions for extracting text from PDFs or image files, using Tesseract
+This service provides functions for extracting text from PDFs or image files, using [Tesseract.js](https://tesseract.projectnaptha.com/)
 
 # Deploying the Service
 
