@@ -82,7 +82,7 @@ export const resolver = {
       return extractTextFromImageFile(file.id)
     },
     extractTextFromPdf: async (_, { file }, { client }) => {
-      const dir = path.resolve(__dirname, `./pdf/`)
+      const dir = path.join(__dirname, `./pdf/`)
       const pdfPath = await download(file.id, `${dir}/${uuid()}.pdf`)
 
       const pdfImage = new PDFImage(pdfPath, {
