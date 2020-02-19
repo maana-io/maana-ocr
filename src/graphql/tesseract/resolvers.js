@@ -2,9 +2,10 @@ import { log, print } from 'io.maana.shared'
 import { gql } from 'apollo-server-express'
 import { createWorker } from 'tesseract.js'
 import { PDFImage } from 'pdf-image'
-import http from 'http'
+import https from 'https'
 import fs from 'fs'
 import path from 'path'
+import uuid from 'uuid'
 
 require('dotenv').config()
 
@@ -13,7 +14,7 @@ const SELF = SERVICE_ID || 'io.maana.template'
 const download = (url, dest) => {
   return new Promise((resolve, reject) => {
     var file = fs.createWriteStream(dest)
-    http
+    https
       .get(url, function(response) {
         response.pipe(file)
         file.on('finish', function() {
